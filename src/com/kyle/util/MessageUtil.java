@@ -64,7 +64,7 @@ public class MessageUtil {
         List<Element> elementList=root.elements();
         //判断有无子元素列表
         if(elementList.size()==0){
-            System.out.println(root.getName()+" ");
+
             map.put(root.getName(),root.getTextTrim());
         }else{
             for(Element e:elementList){

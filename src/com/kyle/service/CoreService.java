@@ -2,15 +2,16 @@ package com.kyle.service;
 
 
 
-import com.kyle.message_resp.Music;
-import com.kyle.message_resp.MusicMessage;
-import com.kyle.message_resp.TextMessage;
+import com.kyle.message_resp.*;
+import com.kyle.util.FacePlusPlusUtil;
 import com.kyle.util.MessageUtil;
 import com.kyle.util.MysqlUtil;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Java on 2016/10/9.
@@ -41,20 +42,53 @@ public class CoreService {
                     Music music=new Music();
                     music.setTitle("boom boom pow");
                     music.setDescription("Black Eyed Pea");
-                    music.setMusicUrl("kyleweixin.duapp.com/weixin_war/music/boom_boom_pow.mp3");
-                    music.setHQMusicUrl("kyleweixin.duapp.com/weixin_war/music/boom_boom_pow.mp3");
+                    music.setMusicUrl("http://15955139rt.imwork.net/music/boom_boom_pow.mp3");
+
+                    music.setHQMusicUrl("http://15955139rt.imwork.net/music/boom_boom_pow.mp3");
 
                     MusicMessage mm=new MusicMessage();
                     mm.setFromUserName(toUserName);
-                    mm.setToUserName(toUserName);
+                    mm.setToUserName(fromUserName);
                     mm.setCreateTime(new Date().getTime());
                     mm.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_MUSIC);
                     mm.setMusic(music);
 
                     respXML=MessageUtil.messageToXML(mm);
                 }
+                else if("2048".equals(content)){
+
+                    Article article=new Article();
+                    article.setTitle("挑战2048");
+                    article.setDescription("这张图是假的。By the way. 反正我是没到过2048 :)");
+                    article.setPicUrl("http://15955139rt.imwork.net/image/2048.jpg");
+                    article.setUrl("http://15955139rt.imwork.net/2048/index.html");
+
+                    List<Article> articles=new ArrayList<>();
+                    articles.add(article);
+
+                    NewsMessage nm=new NewsMessage();
+                    nm.setFromUserName(toUserName);
+                    nm.setToUserName(fromUserName);
+                    nm.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+                    nm.setCreateTime(new Date().getTime());
+                    nm.setArticleCount(articles.size());
+                    nm.setArticles(articles);
+
+                    respXML=MessageUtil.messageToXML(nm);
+                }else{
+                    tm.setContent("您发送的是文本消息");
+                    respXML=MessageUtil.messageToXML(tm);
+                }
             }else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)){
-                tm.setContent("您发送的是图片消息");
+                String imageUrl=requestMap.get("PicUrl");
+                String result=FacePlusPlusUtil.detectFace(imageUrl);
+                if(result!=null){
+                    tm.setContent(FacePlusPlusUtil.detectFace(imageUrl));
+                }else{
+                    tm.setContent("无法识别图片，请换一张。");
+                }
+
+
                 respXML=MessageUtil.messageToXML(tm);
             }else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_VIDEO)){
                 tm.setContent("您发送的是视频消息");

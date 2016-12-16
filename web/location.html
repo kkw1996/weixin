@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>获取地理位置</title>
+</head>
+<body>
+    <div ip="x">定位中。。。</div>
+</body>
+<script type="text/javascript">
+    var x=document.getElementById("x");
+
+    function getLocation(){
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showPosition,showError);
+        }else{
+            x.innerHTML="不支持获取地理位置"
+        }
+    }
+    function showPosition(position) {
+        x.innerHTML = "纬度:" + position.coords.latitude + " 经度：" + position.coords.longitude;
+    }
+     
+    function showError(error) {
+        x.innerHTML="出错了"
+    }
+    getLocation()
+</script>
+</html>

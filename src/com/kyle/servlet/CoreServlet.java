@@ -19,7 +19,7 @@ public class CoreServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         response.setCharacterEncoding("utf-8");
-
+        System.out.println("哈哈哈");
         //请求校验
         String signature=request.getParameter("signature");
         String timestamp=request.getParameter("timestamp");
@@ -34,6 +34,7 @@ public class CoreServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         String signature=request.getParameter("signature");
         String timestamp=request.getParameter("timestamp");
         String nonce=request.getParameter("nonce");
