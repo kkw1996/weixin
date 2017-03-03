@@ -9,7 +9,7 @@ import net.sf.json.JSONObject;
  */
 public class TokenTest {
     public static void main(String[] args) throws Exception {
-        Token token=CommonUtil.getAcessToken("wxc12fa433d2c83561","343c66d1b966fc80fb1b49c506670666");
+        Token token=CommonUtil.getAcessToken("wxc12fa433d2c83561","d5f78610a074fb55994c9ea22daac923");
         System.out.println(token.getAccess_token()+" "+token.getExpires_in());
     }
 }

@@ -42,9 +42,9 @@ public class CoreService {
                     Music music=new Music();
                     music.setTitle("boom boom pow");
                     music.setDescription("Black Eyed Pea");
-                    music.setMusicUrl("http://15955139rt.imwork.net/music/boom_boom_pow.mp3");
+                    music.setMusicUrl("http://kyleweixin.duapp.com/weixin_war/music/boom_boom_pow.mp3");
 
-                    music.setHQMusicUrl("http://15955139rt.imwork.net/music/boom_boom_pow.mp3");
+                    music.setHQMusicUrl("http://kyleweixin.duapp.com/weixin_war/music/boom_boom_pow.mp3");
 
                     MusicMessage mm=new MusicMessage();
                     mm.setFromUserName(toUserName);
@@ -60,8 +60,8 @@ public class CoreService {
                     Article article=new Article();
                     article.setTitle("挑战2048");
                     article.setDescription("这张图是假的。By the way. 反正我是没到过2048 :)");
-                    article.setPicUrl("http://15955139rt.imwork.net/image/2048.jpg");
-                    article.setUrl("http://15955139rt.imwork.net/2048/index.html");
+                    article.setPicUrl("http://kyleweixin.duapp.com/weixin_war/image/2048.jpg");
+                    article.setUrl("http://kyleweixin.duapp.com/weixin_war/2048/index.html");
 
                     List<Article> articles=new ArrayList<>();
                     articles.add(article);
@@ -76,7 +76,10 @@ public class CoreService {
 
                     respXML=MessageUtil.messageToXML(nm);
                 }else{
-                    tm.setContent("您发送的是文本消息");
+                    tm.setContent("您发送的是文本消息，" +
+                            "" +
+                            "" +
+                            "试着发送“2048”看看。");
                     respXML=MessageUtil.messageToXML(tm);
                 }
             }else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_IMAGE)){
@@ -105,7 +108,7 @@ public class CoreService {
             }else if(msgType.equals(MessageUtil.REQ_MESSAGE_TYPE_EVENT)){
                 String eventType=requestMap.get("Event");
                 if(eventType.equals(MessageUtil.EVENT_TYPE_SUBSCRIBE)){
-                    tm.setContent("欢迎关注");
+                    tm.setContent("Boom! Boom! Boom!欢迎关注！看到这条消息的人三天内必有好事发生！");
                     respXML=MessageUtil.messageToXML(tm);
                 }else if( eventType.equals(MessageUtil.EVENT_TYPE_UNSUBSCRIBE)){
 
